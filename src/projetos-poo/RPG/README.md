@@ -5,7 +5,6 @@
         ° Salvar as maestrias
         ° Exibir todas as maestrias salvas no sistema
         ° Carregar os dados para não ter dados duplicados
-        ° Editar alguma variavel que não gostou
         ° Remover maestria
     
     - Inventario terá as seguintes funções:
