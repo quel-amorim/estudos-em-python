@@ -74,20 +74,18 @@ class Maestria:
         try:
             with open('maestrias.json', 'r') as arquivo_json:
                 self.minhas_maestrias = json.load(arquivo_json)
-
         except (FileNotFoundError, json.JSONDecodeError):
             self.minhas_maestrias = []
 
     def exibir_maestrias(self):
         self.carregar_dados()
 
-        print('------ Maestrias do Jogo ---------\n')
+        print('------ Maestrias do Jogo ---------')
 
         for maestria in self.minhas_maestrias:
-            print(f"{maestria['nome']} Nv {maestria['nivel']}")
+            print(f"  *  {maestria['nome']}")
 
     def remover_maestria(self):
-        self.carregar_dados()
         self.exibir_maestrias()
 
         remover = input('Remover Maestria: ')
@@ -99,7 +97,7 @@ class Maestria:
                 self.salvar()
                 return
 
-    print('Maestria não encontrada!')
+        print('Maestria não encontrada!')
 
     def menu_maestria(self):
         while True:
