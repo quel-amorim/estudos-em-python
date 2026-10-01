@@ -1,0 +1,1 @@
+[{"nome": "Zumbi", "nivel": 1, "status": {"vit": 12, "forca": 8, "defesa": 7, "resistencia": 6, "inteligencia": 7}}, {"nome": "Demonio", "nivel": 1, "status": {"vit": 8, "forca": 10, "defesa": 14, "resistencia": 14, "inteligencia": 12}}, {"nome": "Vampiro", "nivel": 1, "status": {"vit": 10, "forca": 10, "defesa": 10, "resistencia": 10, "inteligencia": 10}}]

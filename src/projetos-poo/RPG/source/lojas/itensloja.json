@@ -1,0 +1,20 @@
+[
+    {
+        "nome": "Machado",
+        "raridade": "Lendario",
+        "valor": 21,
+        "dano": 52.5
+    },
+    {
+        "nome": "Espada",
+        "raridade": "Lendario",
+        "valor": 24,
+        "dano": 60.0
+    },
+    {
+        "nome": "Arco",
+        "raridade": "Lendario",
+        "valor": 20,
+        "dano": 50.0
+    }
+]
