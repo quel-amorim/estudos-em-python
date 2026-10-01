@@ -1,0 +1,91 @@
+import json
+import os
+from random import randint
+class Modelo_maestria:
+    def __init__(self):
+        self.lista_maestrias = []
+        self.atributos = {
+            'vit' :0,
+            'forca' : 0,
+            'defesa' : 0,
+            'inteligencia' : 0
+        }
+        self.nivel = 1
+        self.carregar_dados()
+
+    def carregar_dados(self):
+        """Carrega as maestrias salvas anteriormente se o arquivo existir."""
+        if os.path.exists('maestria.json'):
+            try:
+                with open('maestria.json', 'r', encoding='utf-8') as arquivo_json:
+                    self.lista_maestrias = json.load(arquivo_json)
+            except json.JSONDecodeError:
+                self.lista_maestrias = []
+
+    def exibir_atributos(self):
+        print(f'-- Atributos do {self.lista_maestrias['nome']} --')
+        print(f"    VITALIDADE   : {self.atributos['vit']}")
+        print(f"    FORCA        : {self.atributos['forca']}")
+        print(f"    DEFESA       : {self.atributos['defesa']}")
+        print(f"    INTELIGENCIA : {self.atributos['inteligencia']}\n")
+
+    def definir_valores(self,nome_atributo):
+        while True:
+            try:
+                valor = int(input(f'Valor {nome_atributo} (0 , 20):'))
+
+                if valor <=0 or valor <=20:
+                    print('Não poder colocar valores maior que 20 ou menor que 0')
+                    continue
+
+                break
+            except ValueError:
+                print('Apenas números !')
+                continue
+
+        return valor
+
+    def randomizar_valores(self):
+        self.atributos['vit'] = randint(0 ,20)
+        self.atributos['forca'] = randint(0 ,20)
+        self.atributos['defesa'] = randint(0 ,20)
+        self.atributos['inteligencia'] = randint(0 ,20)
+
+        return self.atributos
+
+    def criar_maestria(self):
+        nome_maestria = input('Nome maestria/classe :').upper()
+        while True:
+            modelo_definicao_at = int(input('ESCOLHA SE O SISTEMA VAI ESCOLHER SEUS ATRIBUTOS , OU VOCÊ MESMO IRÁ FAZER\n[1] SISTEMA ESCOLHE\n[2] VOCÊ ESCOLHE\nDecisão :'))
+            if modelo_definicao_at == 1:
+                self.randomizar_valores()
+                break
+            elif modelo_definicao_at == 2:
+                self.atributos['vit'] = self.definir_valores('Vitalidade')
+                self.atributos['forca'] = self.definir_valores('Forca')
+                self.atributos['defesa'] = self.definir_valores('Defesa')
+                self.atributos['inteligencia'] = self.definir_valores('Inteligencia')
+                break
+
+        nova_maestria = {
+            'nome' : nome_maestria,
+            'nivel' : self.nivel,
+            'atributo' : self.atributos.copy()
+        }
+        self.lista_maestrias.append(nova_maestria)
+        print('CLASSE {} CRIADA COM SUCESSO !'.format(nome_maestria))
+        self.salvar()
+
+    def salvar(self):
+        with open('maestria.json','w') as arquivo_json:
+            json.dump(self.lista_maestrias,arquivo_json)
+
+
+SISTEMA = Modelo_maestria()
+
+while True:
+    SISTEMA.criar_maestria()
+    continuar = input('\nDeseja criar outra maestria? [S/N]: ').strip().upper()
+    if continuar != 'S':
+        print('Programa encerrado!')
+        break
