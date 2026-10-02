@@ -22,12 +22,6 @@ class Modelo_maestria:
             except json.JSONDecodeError:
                 self.lista_maestrias = []
 
-    def exibir_atributos(self):
-        print(f'-- Atributos do {self.lista_maestrias['nome']} --')
-        print(f"    VITALIDADE   : {self.atributos['vit']}")
-        print(f"    FORCA        : {self.atributos['forca']}")
-        print(f"    DEFESA       : {self.atributos['defesa']}")
-        print(f"    INTELIGENCIA : {self.atributos['inteligencia']}\n")
 
     def definir_valores(self,nome_atributo):
         while True:
@@ -76,16 +70,32 @@ class Modelo_maestria:
         print('CLASSE {} CRIADA COM SUCESSO !'.format(nome_maestria))
         self.salvar()
 
+    def exibir_atributos(self):
+            for maestria in self.lista_maestrias:
+                print(f'-- Atributos do {maestria['nome']} --')
+                print(f"    VITALIDADE   : {maestria['atributo']['vit']}")
+                print(f"    FORCA        : {maestria['atributo']['forca']}")
+                print(f"    DEFESA       : {maestria['atributo']['defesa']}")
+                print(f"    INTELIGENCIA : {maestria['atributo']['inteligencia']}\n")
+
     def salvar(self):
         with open('maestria.json','w') as arquivo_json:
             json.dump(self.lista_maestrias,arquivo_json)
 
+    def listar_todas_maestrias(self):
+        for maestria in self.lista_maestrias:
+            print(f' * {maestria['nome']} LV {maestria['nivel']}')
+
+
 
 SISTEMA = Modelo_maestria()
 
-while True:
-    SISTEMA.criar_maestria()
-    continuar = input('\nDeseja criar outra maestria? [S/N]: ').strip().upper()
-    if continuar != 'S':
-        print('Programa encerrado!')
-        break
+#while True:
+ #   SISTEMA.criar_maestria()
+  #  continuar = input('\nDeseja criar outra maestria? [S/N]: ').strip().upper()
+   # if continuar != 'S':
+    #    print('Programa encerrado!')
+     #   break
+
+SISTEMA.listar_todas_maestrias()
+SISTEMA.exibir_atributos()
