@@ -16,5 +16,6 @@ class Agenda:
                 self.contatos = []
                 print('Não tem nada salvo :' , self.contatos)
 
-    def menuAgenda(self):
-         pass
+    def exibirContatos(self):
+         for contato in self.contatos:
+              print(f' * {contato['nome']} -> {contato['telefone']}')

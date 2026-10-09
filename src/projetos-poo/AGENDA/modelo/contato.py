@@ -2,6 +2,7 @@ from agendamento import Agenda
 from random import randint,choice
 from datetime import datetime
 from string import ascii_uppercase , digits
+#Aqui vou deixar as minhas funções de , criar,deletar, e editar | A parte de exibir , salvar e carregar vai está na classe Agenda
 class Contato(Agenda):
     def __init__(self):
         super().__init__()
@@ -36,4 +37,39 @@ class Contato(Agenda):
         self.contatos.append(contato)
         self.salvamento_contato()
         print(f"O {contato['nome']} foi adicionado com sucesso , código especial é {contato['codigoespecial']}")
-    
+
+    def remover(self):
+        pass
+
+    def editarContato(self):
+        pass
+
+    def menuContato(self):
+        while True:
+         print('---- Opções do Sistema ----\n')
+         print('[1] Criar / Adicionar nos Contatos')
+         print('[2] Exibir Contatos')
+         print('[3] Editar')
+         print('[4] Remover')
+         print('[0] Sair')
+         print('-------------------------------------')
+         try:
+            escolha = int(input('Escolha :'))
+
+            if escolha == 1:
+                pass
+            elif escolha == 2:
+                pass
+            elif escolha == 3:
+                pass
+            elif escolha == 4:
+                pass
+            elif escolha == 0:
+                print('Fim')
+                break
+            else:
+                print('Desconhecido !')
+
+         except ValueError:
+             print('Apenas números ')
+             continue
