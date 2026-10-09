@@ -1,0 +1,42 @@
+from agendamento import Agenda
+from random import randint,choice
+from datetime import datetime
+from string import ascii_uppercase , digits , punctuation
+class Contato(Agenda):
+    def __init__(self):
+        super().__init__()
+
+    def geradorNumero(self):
+        ddds = [11, 12, 13, 19, 21, 22, 24, 27, 28, 31, 32, 41, 47, 48, 51, 61, 71, 81, 85]
+        numeroDDD = choice(ddds)
+        parte1 = randint(1000, 9999)
+        parte2 = randint(1000, 9999)
+        telefone = f"+55 ({numeroDDD}) 9{parte1}-{parte2}"
+        return telefone
+
+
+    def dataAdicao(self):
+        dataAtual = datetime.now()
+        data = dataAtual.strftime("%d/%m/%Y")
+        return data
+
+    def geradorIDEspecial(self,tamanho):
+        numeros = digits
+        letras = ascii_uppercase # Ex(A,B,C etc...)
+        pontuacoes = punctuation # Ex (!,@,#,$ etc...)
+        especial = letras + numeros + pontuacoes
+
+        formatado = "".join(choice(especial) for _ in range(tamanho))
+        print(formatado)
+
+
+    def criarContato(self):
+        nome_contato = input('Nome do Contato:')
+        
+
+teste = Contato()
+
+teste.dataAdicao()
+
+#return "".join(choice(especial) for _ in range(tamanho))
+        #return telefoneFormatado
