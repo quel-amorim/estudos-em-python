@@ -1,7 +1,8 @@
-class Inventario:
+from gerenciamento import Gerenciamento
+class Inventario(Gerenciamento):
     def __init__(self):
-        self.meus_itens = []
+        super().__init__()
 
     def buscar_itens(self):
-        print('Itens atuais no inventario {}'.format(len(self.meus_itens)))
+        print('Itens atuais no inventario {}'.format(len(self.itens_loja)))
         
