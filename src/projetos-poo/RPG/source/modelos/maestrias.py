@@ -1,9 +1,10 @@
 import json
 import os
 from random import randint
-class Modelo_maestria:
+from gerenciamento import Gerenciamento
+class Modelo_maestria(Gerenciamento):
     def __init__(self):
-        self.lista_maestrias = []
+        super().__init__()
         self.atributos = {
             'vit' :0,
             'forca' : 0,
@@ -18,9 +19,9 @@ class Modelo_maestria:
         if os.path.exists('maestria.json'):
             try:
                 with open('maestria.json', 'r', encoding='utf-8') as arquivo_json:
-                    self.lista_maestrias = json.load(arquivo_json)
+                    self.maestrias = json.load(arquivo_json)
             except json.JSONDecodeError:
-                self.lista_maestrias = []
+                self.maestrias = []
 
 
     def definir_valores(self,nome_atributo):
@@ -66,12 +67,12 @@ class Modelo_maestria:
             'nivel' : self.nivel,
             'atributo' : self.atributos.copy()
         }
-        self.lista_maestrias.append(nova_maestria)
+        self.maestrias.append(nova_maestria)
         print('CLASSE {} CRIADA COM SUCESSO !'.format(nome_maestria))
         self.salvar()
 
     def exibir_atributos(self):
-            for maestria in self.lista_maestrias:
+            for maestria in self.maestrias:
                 print(f'-- Atributos do {maestria['nome']} --')
                 print(f"    VITALIDADE   : {maestria['atributo']['vit']}")
                 print(f"    FORCA        : {maestria['atributo']['forca']}")
@@ -80,22 +81,17 @@ class Modelo_maestria:
 
     def salvar(self):
         with open('maestria.json','w') as arquivo_json:
-            json.dump(self.lista_maestrias,arquivo_json)
+            json.dump(self.maestrias,arquivo_json)
 
     def listar_todas_maestrias(self):
-        for maestria in self.lista_maestrias:
+        for maestria in self.maestrias:
             print(f' * {maestria['nome']} LV {maestria['nivel']}')
 
 
+            
+
 
 SISTEMA = Modelo_maestria()
-
-#while True:
- #   SISTEMA.criar_maestria()
-  #  continuar = input('\nDeseja criar outra maestria? [S/N]: ').strip().upper()
-   # if continuar != 'S':
-    #    print('Programa encerrado!')
-     #   break
 
 SISTEMA.listar_todas_maestrias()
 SISTEMA.exibir_atributos()
