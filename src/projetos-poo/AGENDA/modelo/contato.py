@@ -1,7 +1,7 @@
 from agendamento import Agenda
 from random import randint,choice
 from datetime import datetime
-from string import ascii_uppercase , digits , punctuation
+from string import ascii_uppercase , digits
 class Contato(Agenda):
     def __init__(self):
         super().__init__()
@@ -11,22 +11,18 @@ class Contato(Agenda):
         numeroDDD = choice(ddds)
         parte1 = randint(1000, 9999)
         parte2 = randint(1000, 9999)
-        telefone = f"+55 ({numeroDDD}) 9{parte1}-{parte2}"
-        return telefone
+        return f"+55 ({numeroDDD}) 9{parte1}-{parte2}"
 
 
     def dataAdicao(self):
-        dataAtual = datetime.now()
-        data = dataAtual.strftime("%d/%m/%Y")
-        return data
+        return datetime.now().strftime("%d/%m/%Y")
 
-    def geradorIDEspecial(self,tamanho):
-        numeros = digits
-        letras = ascii_uppercase # Ex(A,B,C etc...)
-        pontuacoes = punctuation # Ex (!,@,#,$ etc...)
-        especial = letras + numeros + pontuacoes
-
-        return "".join(choice(especial) for _ in range(tamanho))
+    def geradorIDEspecial(self, tamanho=8):
+        caracteres = ascii_uppercase + digits
+        while True:
+            codigo = "".join(choice(caracteres) for _ in range(tamanho))
+            if not any(contato["codigoespecial"] == codigo for contato in self.contatos):
+                return codigo
         
 
     def criarContato(self):
@@ -41,13 +37,3 @@ class Contato(Agenda):
         self.salvamento_contato()
         print(f"O {contato['nome']} foi adicionado com sucesso , código especial é {contato['codigoespecial']}")
     
-    def remocaoContato(self):
-            remover_especial = input('Informe Código especial para Remoção do contato :')
-            for pessoa in self.contatos:
-                 if remover_especial == pessoa['codigoespecial']:
-                    remover = int(input(f"Deseja remover {pessoa['nome']} da sua lista de contatos?\n[1] SIM\n[2]NÃO\nESCOLHA :"))
-                    if remover == 1:
-                        self.contatos.remove(remover_especial)
-                        self.salvamento_contato()
-                    else:
-                        print('Nada será feito !')
