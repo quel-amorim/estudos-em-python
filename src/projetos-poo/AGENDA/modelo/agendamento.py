@@ -7,4 +7,14 @@ class Agenda:
         with open("contatos.json",'w') as arquivo_contato:
             json.dump(self.contatos,arquivo_contato)
 
-    
+    def carregamento_contato(self):
+        try:
+            with open("contatos.json",'r') as arquivo_contato:
+                self.contatos = json.load(arquivo_contato)
+
+        except FileNotFoundError:
+                self.contatos = []
+                print('Não tem nada salvo :' , self.contatos)
+
+    def menuAgenda(self):
+         pass

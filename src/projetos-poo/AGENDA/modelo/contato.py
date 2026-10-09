@@ -26,17 +26,28 @@ class Contato(Agenda):
         pontuacoes = punctuation # Ex (!,@,#,$ etc...)
         especial = letras + numeros + pontuacoes
 
-        formatado = "".join(choice(especial) for _ in range(tamanho))
-        print(formatado)
-
+        return "".join(choice(especial) for _ in range(tamanho))
+        
 
     def criarContato(self):
         nome_contato = input('Nome do Contato:')
-        
-
-teste = Contato()
-
-teste.dataAdicao()
-
-#return "".join(choice(especial) for _ in range(tamanho))
-        #return telefoneFormatado
+        contato = {
+           'codigoespecial' : self.geradorIDEspecial(7),
+            'nome' : nome_contato,
+            'telefone' : self.geradorNumero(),
+            'adicao' : self.dataAdicao()
+        }
+        self.contatos.append(contato)
+        self.salvamento_contato()
+        print(f"O {contato['nome']} foi adicionado com sucesso , código especial é {contato['codigoespecial']}")
+    
+    def remocaoContato(self):
+            remover_especial = input('Informe Código especial para Remoção do contato :')
+            for pessoa in self.contatos:
+                 if remover_especial == pessoa['codigoespecial']:
+                    remover = int(input(f"Deseja remover {pessoa['nome']} da sua lista de contatos?\n[1] SIM\n[2]NÃO\nESCOLHA :"))
+                    if remover == 1:
+                        self.contatos.remove(remover_especial)
+                        self.salvamento_contato()
+                    else:
+                        print('Nada será feito !')
